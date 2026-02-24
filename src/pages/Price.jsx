@@ -2,8 +2,8 @@ import { useState, useEffect } from 'react'
 // reads symbol from the URL
 import { useParams } from 'react-router-dom'
 
-// base URL for CoinAPI
-const API_BASE = 'https://rest.coinapi.io/v1/exchangerate'
+// CoinGecko free API, no key needed
+const API_BASE = 'https://api.coingecko.com/api/v3/simple/price'
 
 function Price() {
   // get symbol from URL
@@ -18,14 +18,15 @@ function Price() {
 
   async function getCoin() {
     try {
-      // fetch rate for symbol to USD
+      // fetch price in USD
       const res = await fetch(
-        `${API_BASE}/${symbol}/USD`,
-        { headers: { 'X-CoinAPI-Key': import.meta.env.VITE_COINAPI_KEY } }
+        `${API_BASE}?ids=${symbol}&vs_currencies=usd`
       )
       const data = await res.json()
+      // throw if API returned an error
+      if (!res.ok) throw new Error('API error')
       // save rate to state
-      setPrice(data.rate)
+      setPrice(data[symbol].usd)
     } catch (err) {
       console.error(err)
       setError('Could not load price.')

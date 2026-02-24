@@ -2,8 +2,8 @@ import { Link } from 'react-router-dom'
 
 // list of crypto symbols
 const currencies = [
-  'BTC', 'ETH', 'LTC', 'XRP', 'BCH',
-  'ADA', 'DOT', 'LINK', 'XLM', 'DOGE',
+  'bitcoin', 'ethereum', 'litecoin', 'ripple', 'bitcoin-cash',
+  'cardano', 'polkadot', 'chainlink', 'stellar', 'dogecoin',
 ]
 
 function Currencies() {
