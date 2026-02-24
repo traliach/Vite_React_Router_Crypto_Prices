@@ -5,6 +5,9 @@ import { useParams } from 'react-router-dom'
 // CoinGecko free API, no key needed
 const API_BASE = 'https://api.coingecko.com/api/v3/simple/price'
 
+// amounts to show in conversion table
+const amounts = [1, 5, 10, 50, 100]
+
 function Price() {
   // get symbol from URL
   const { symbol } = useParams()
@@ -48,8 +51,29 @@ function Price() {
       {loading && <p>Loading...</p>}
       {/* show if fetch failed */}
       {error && <p>{error}</p>}
-      {/* show the price */}
-      {price && <p>1 {symbol} = ${price.toLocaleString()} USD</p>}
+      {/* show the current price */}
+      {price && (
+        <p className="current-price">1 {symbol} = ${price.toLocaleString()} USD</p>
+      )}
+      {/* conversion table */}
+      {price && (
+        <table>
+          <thead>
+            <tr>
+              <th>Amount</th>
+              <th>USD Value</th>
+            </tr>
+          </thead>
+          <tbody>
+            {amounts.map((amt) => (
+              <tr key={amt}>
+                <td>{amt} {symbol}</td>
+                <td>${(amt * price).toLocaleString()}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      )}
     </div>
   )
 }
