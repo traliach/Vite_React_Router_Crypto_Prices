@@ -1,16 +1,48 @@
-# React + Vite
+# Crypto Prices App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A React app that shows live crypto prices using the CoinAPI.
 
-Currently, two official plugins are available:
+## What it does
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- Click Currencies to see a list of crypto symbols
+- Click any symbol to go to its price page
+- The price page fetches the live USD rate from CoinAPI
+- Shows a loading message while waiting
+- Shows an error message if the fetch fails
 
-## React Compiler
+## Concepts used
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- **React Router** — handles navigation between pages without reloading
+- **BrowserRouter** — wraps the whole app so routing works
+- **Routes / Route** — maps each URL path to a page component
+- **Link** — navigates between pages without a full page reload
+- **useParams** — reads the symbol from the URL on the Price page
+- **useState** — stores price, loading, and error values
+- **useEffect** — triggers the fetch when the page loads or symbol changes
+- **async/await + try/catch** — handles the API call and errors cleanly
+- **Environment variable** — API key is stored in `.env`, not in the code
 
-## Expanding the ESLint configuration
+## Pages
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- `Main.jsx` — home page
+- `Currencies.jsx` — list of crypto symbols with links
+- `Price.jsx` — fetches and displays the price for a symbol
+
+## Components
+
+- `Nav.jsx` — navigation links shown on every page
+
+## How to run it
+
+1. Clone the repo
+2. Run `npm install --legacy-peer-deps`
+3. Create a `.env` file in the root with your CoinAPI key:
+   ```
+   VITE_COINAPI_KEY=your_key_here
+   ```
+4. Run `npm run dev`
+5. Open `http://localhost:5173`
+
+## API
+
+This app uses the [CoinAPI](https://www.coinapi.io). You can get a free API key at coinapi.io.

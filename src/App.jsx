@@ -7,12 +7,16 @@ import Price from './pages/Price'
 function App() {
   return (
     <>
+      {/* nav shows on every page */}
       <Nav />
       <Routes>
-      <Route path="/" element={<Main />} />
-      <Route path="/currencies" element={<Currencies />} />
-      <Route path="/price/:symbol" element={<Price />} />
-    </Routes>
+        {/* home page route */}
+        <Route path="/" element={<Main />} />
+        {/* list of currencies */}
+        <Route path="/currencies" element={<Currencies />} />
+        {/* price page with symbol param */}
+        <Route path="/price/:symbol" element={<Price />} />
+      </Routes>
     </>
   )
 }
