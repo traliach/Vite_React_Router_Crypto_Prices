@@ -6,7 +6,10 @@ A React app that shows live crypto prices using the CoinGecko free API.
 
 - Click Currencies to see a list of crypto coins
 - Click any coin to go to its price page
-- The price page fetches the live USD rate from CoinGecko
+- Shows the live price in USD
+- Shows a conversion table for 1, 5, 10, 50, and 100 coins
+- Conversion table includes USD, EUR, and XOF (West African CFA franc)
+- XOF is calculated from EUR using the fixed rate: 1 EUR = 655.957 XOF
 - Shows a loading message while waiting
 - Shows an error message if the fetch fails
 
@@ -17,7 +20,7 @@ A React app that shows live crypto prices using the CoinGecko free API.
 - **Routes / Route** — maps each URL path to a page component
 - **Link** — navigates between pages without a full page reload
 - **useParams** — reads the coin name from the URL on the Price page
-- **useState** — stores price, loading, and error values
+- **useState** — stores rates, loading, and error values
 - **useEffect** — triggers the fetch when the page loads or coin changes
 - **async/await + try/catch** — handles the API call and errors cleanly
 
@@ -25,7 +28,7 @@ A React app that shows live crypto prices using the CoinGecko free API.
 
 - `Main.jsx` — home page
 - `Currencies.jsx` — list of crypto coins with links
-- `Price.jsx` — fetches and displays the price for a coin
+- `Price.jsx` — fetches and displays the price and conversion table for a coin
 
 ## Components
 
