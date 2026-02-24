@@ -6,23 +6,99 @@
 
 body {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  background-color: #242424;
-  color: rgba(255, 255, 255, 0.87);
+  background-color: #0f0f13;
+  color: #e0e0e0;
   min-height: 100vh;
 }
 
 a {
-  color: #646cff;
+  color: #7c6eff;
   text-decoration: none;
 }
 
 a:hover {
-  color: #535bf2;
+  color: #a89fff;
 }
 
 .nav {
   display: flex;
   gap: 1.5rem;
   padding: 1rem 2rem;
-  background-color: #1a1a1a;
+  background-color: #1a1a2e;
+  border-bottom: 1px solid #2e2e50;
+}
+
+.nav a {
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+.currencies {
+  padding: 2rem;
+}
+
+.currencies h1 {
+  margin-bottom: 1rem;
+  font-size: 1.8rem;
+  color: #a89fff;
+}
+
+.currencies ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.currencies li a {
+  display: block;
+  padding: 0.6rem 1rem;
+  background-color: #1a1a2e;
+  border-radius: 8px;
+  width: 200px;
+  text-transform: capitalize;
+  transition: background-color 0.2s;
+}
+
+.currencies li a:hover {
+  background-color: #2e2e50;
+}
+
+.price {
+  padding: 2rem;
+}
+
+.price h1 {
+  font-size: 2rem;
+  text-transform: capitalize;
+  color: #a89fff;
+  margin-bottom: 0.5rem;
+}
+
+.price .current-price {
+  font-size: 1.4rem;
+  margin-bottom: 2rem;
+  color: #7dffb3;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+  max-width: 400px;
+}
+
+th {
+  background-color: #1a1a2e;
+  padding: 0.75rem 1rem;
+  text-align: left;
+  color: #a89fff;
+}
+
+td {
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid #2e2e50;
+}
+
+tr:hover td {
+  background-color: #1a1a2e;
 }
