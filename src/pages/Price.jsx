@@ -12,8 +12,8 @@ function Price() {
   // get symbol from URL
   const { symbol } = useParams()
 
-  // stores the fetched price
-  const [price, setPrice] = useState(null)
+  // stores all three rates
+  const [rates, setRates] = useState(null)
   // true while waiting for data
   const [loading, setLoading] = useState(true)
   // holds any error message
@@ -21,15 +21,17 @@ function Price() {
 
   async function getCoin() {
     try {
-      // fetch price in USD
+      // fetch price in USD and EUR only
       const res = await fetch(
-        `${API_BASE}?ids=${symbol}&vs_currencies=usd`
+        `${API_BASE}?ids=${symbol}&vs_currencies=usd,eur`
       )
       const data = await res.json()
       // throw if API returned an error
       if (!res.ok) throw new Error('API error')
-      // save rate to state
-      setPrice(data[symbol].usd)
+      // XOF is pegged to EUR: 1 EUR = 655.957 XOF
+      const xof = data[symbol].eur * 655.957
+      // save all rates to state
+      setRates({ ...data[symbol], xof })
     } catch (err) {
       console.error(err)
       setError('Could not load price.')
@@ -51,24 +53,28 @@ function Price() {
       {loading && <p>Loading...</p>}
       {/* show if fetch failed */}
       {error && <p>{error}</p>}
-      {/* show the current price */}
-      {price && (
-        <p className="current-price">1 {symbol} = ${price.toLocaleString()} USD</p>
+      {/* show the current USD price */}
+      {rates && (
+        <p className="current-price">1 {symbol} = ${rates.usd.toLocaleString()} USD</p>
       )}
-      {/* conversion table */}
-      {price && (
+      {/* conversion table with USD, EUR, XOF */}
+      {rates && (
         <table>
           <thead>
             <tr>
               <th>Amount</th>
-              <th>USD Value</th>
+              <th>USD</th>
+              <th>EUR</th>
+              <th>XOF</th>
             </tr>
           </thead>
           <tbody>
             {amounts.map((amt) => (
               <tr key={amt}>
                 <td>{amt} {symbol}</td>
-                <td>${(amt * price).toLocaleString()}</td>
+                <td>${(amt * rates.usd).toLocaleString()}</td>
+                <td>€{(amt * rates.eur).toLocaleString()}</td>
+                <td>{(amt * rates.xof).toLocaleString()} XOF</td>
               </tr>
             ))}
           </tbody>
